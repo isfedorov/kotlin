@@ -22,7 +22,7 @@ class JsKlibMetadataSerializerExtension(
     private val fileRegistry: JsKlibMetadataFileRegistry,
     private val languageVersionSettings: LanguageVersionSettings,
     override val metadataVersion: BinaryVersion,
-    val declarationTableHandler: ((DeclarationDescriptor) -> JsKlibMetadataProtoBuf.DescriptorUniqId?)?
+    val declarationTableHandler: ((DeclarationDescriptor) -> JsKlibMetadataProtoBuf.DescriptorUniqId?)
 ) : KotlinSerializerExtensionBase(JsKlibMetadataSerializerProtocol) {
     override val stringTable = JsKlibMetadataStringTable()
 
@@ -33,7 +33,7 @@ class JsKlibMetadataSerializerExtension(
     private fun uniqId(descriptor: DeclarationDescriptor): JsKlibMetadataProtoBuf.DescriptorUniqId? {
 //        val index = declarationTable.descriptorTable.get(descriptor)
 //        return index?.let { newDescriptorUniqId(it) }
-        return declarationTableHandler?.let { it(descriptor) }
+        return declarationTableHandler(descriptor)
     }
 
     override fun serializeTypeParameter(typeParameter: TypeParameterDescriptor, proto: ProtoBuf.TypeParameter.Builder) {

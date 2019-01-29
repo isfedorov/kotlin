@@ -3176,15 +3176,6 @@ public final class JsKlibMetadataProtoBuf {
       org.jetbrains.kotlin.protobuf.MessageLiteOrBuilder {
 
     /**
-     * <code>optional .org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.Library.Kind kind = 1 [default = PLAIN];</code>
-     */
-    boolean hasKind();
-    /**
-     * <code>optional .org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.Library.Kind kind = 1 [default = PLAIN];</code>
-     */
-    org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.JsKlibMetadataProtoBuf.Library.Kind getKind();
-
-    /**
      * <code>repeated .org.jetbrains.kotlin.metadata.PackageFragment package_fragment = 2;</code>
      */
     java.util.List<org.jetbrains.kotlin.metadata.ProtoBuf.PackageFragment> 
@@ -3267,31 +3258,19 @@ public final class JsKlibMetadataProtoBuf {
               }
               break;
             }
-            case 8: {
-              int rawValue = input.readEnum();
-              org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.JsKlibMetadataProtoBuf.Library.Kind value = org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.JsKlibMetadataProtoBuf.Library.Kind.valueOf(rawValue);
-              if (value == null) {
-                unknownFieldsCodedOutput.writeRawVarint32(tag);
-                unknownFieldsCodedOutput.writeRawVarint32(rawValue);
-              } else {
-                bitField0_ |= 0x00000001;
-                kind_ = value;
-              }
-              break;
-            }
             case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
                 packageFragment_ = new java.util.ArrayList<org.jetbrains.kotlin.metadata.ProtoBuf.PackageFragment>();
-                mutable_bitField0_ |= 0x00000002;
+                mutable_bitField0_ |= 0x00000001;
               }
               packageFragment_.add(input.readMessage(org.jetbrains.kotlin.metadata.ProtoBuf.PackageFragment.PARSER, extensionRegistry));
               break;
             }
             case 26: {
               org.jetbrains.kotlin.protobuf.ByteString bs = input.readBytes();
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 importedModule_ = new org.jetbrains.kotlin.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000004;
+                mutable_bitField0_ |= 0x00000002;
               }
               importedModule_.add(bs);
               break;
@@ -3304,10 +3283,10 @@ public final class JsKlibMetadataProtoBuf {
         throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           packageFragment_ = java.util.Collections.unmodifiableList(packageFragment_);
         }
-        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           importedModule_ = importedModule_.getUnmodifiableView();
         }
         try {
@@ -3333,96 +3312,6 @@ public final class JsKlibMetadataProtoBuf {
     @java.lang.Override
     public org.jetbrains.kotlin.protobuf.Parser<Library> getParserForType() {
       return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.Library.Kind}
-     */
-    public enum Kind
-        implements org.jetbrains.kotlin.protobuf.Internal.EnumLite {
-      /**
-       * <code>PLAIN = 1;</code>
-       */
-      PLAIN(0, 1),
-      /**
-       * <code>AMD = 2;</code>
-       */
-      AMD(1, 2),
-      /**
-       * <code>COMMON_JS = 3;</code>
-       */
-      COMMON_JS(2, 3),
-      /**
-       * <code>UMD = 4;</code>
-       */
-      UMD(3, 4),
-      ;
-
-      /**
-       * <code>PLAIN = 1;</code>
-       */
-      public static final int PLAIN_VALUE = 1;
-      /**
-       * <code>AMD = 2;</code>
-       */
-      public static final int AMD_VALUE = 2;
-      /**
-       * <code>COMMON_JS = 3;</code>
-       */
-      public static final int COMMON_JS_VALUE = 3;
-      /**
-       * <code>UMD = 4;</code>
-       */
-      public static final int UMD_VALUE = 4;
-
-
-      public final int getNumber() { return value; }
-
-      public static Kind valueOf(int value) {
-        switch (value) {
-          case 1: return PLAIN;
-          case 2: return AMD;
-          case 3: return COMMON_JS;
-          case 4: return UMD;
-          default: return null;
-        }
-      }
-
-      public static org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<Kind>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<Kind>
-          internalValueMap =
-            new org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<Kind>() {
-              public Kind findValueByNumber(int number) {
-                return Kind.valueOf(number);
-              }
-            };
-
-      private final int value;
-
-      private Kind(int index, int value) {
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.Library.Kind)
-    }
-
-    private int bitField0_;
-    public static final int KIND_FIELD_NUMBER = 1;
-    private org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.JsKlibMetadataProtoBuf.Library.Kind kind_;
-    /**
-     * <code>optional .org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.Library.Kind kind = 1 [default = PLAIN];</code>
-     */
-    public boolean hasKind() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional .org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.Library.Kind kind = 1 [default = PLAIN];</code>
-     */
-    public org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.JsKlibMetadataProtoBuf.Library.Kind getKind() {
-      return kind_;
     }
 
     public static final int PACKAGE_FRAGMENT_FIELD_NUMBER = 2;
@@ -3490,7 +3379,6 @@ public final class JsKlibMetadataProtoBuf {
     }
 
     private void initFields() {
-      kind_ = org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.JsKlibMetadataProtoBuf.Library.Kind.PLAIN;
       packageFragment_ = java.util.Collections.emptyList();
       importedModule_ = org.jetbrains.kotlin.protobuf.LazyStringArrayList.EMPTY;
     }
@@ -3513,9 +3401,6 @@ public final class JsKlibMetadataProtoBuf {
     public void writeTo(org.jetbrains.kotlin.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeEnum(1, kind_.getNumber());
-      }
       for (int i = 0; i < packageFragment_.size(); i++) {
         output.writeMessage(2, packageFragment_.get(i));
       }
@@ -3531,10 +3416,6 @@ public final class JsKlibMetadataProtoBuf {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += org.jetbrains.kotlin.protobuf.CodedOutputStream
-          .computeEnumSize(1, kind_.getNumber());
-      }
       for (int i = 0; i < packageFragment_.size(); i++) {
         size += org.jetbrains.kotlin.protobuf.CodedOutputStream
           .computeMessageSize(2, packageFragment_.get(i));
@@ -3642,12 +3523,10 @@ public final class JsKlibMetadataProtoBuf {
 
       public Builder clear() {
         super.clear();
-        kind_ = org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.JsKlibMetadataProtoBuf.Library.Kind.PLAIN;
-        bitField0_ = (bitField0_ & ~0x00000001);
         packageFragment_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000001);
         importedModule_ = org.jetbrains.kotlin.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -3670,34 +3549,25 @@ public final class JsKlibMetadataProtoBuf {
       public org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.JsKlibMetadataProtoBuf.Library buildPartial() {
         org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.JsKlibMetadataProtoBuf.Library result = new org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.JsKlibMetadataProtoBuf.Library(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.kind_ = kind_;
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
           packageFragment_ = java.util.Collections.unmodifiableList(packageFragment_);
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
         }
         result.packageFragment_ = packageFragment_;
-        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
           importedModule_ = importedModule_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000002);
         }
         result.importedModule_ = importedModule_;
-        result.bitField0_ = to_bitField0_;
         return result;
       }
 
       public Builder mergeFrom(org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.JsKlibMetadataProtoBuf.Library other) {
         if (other == org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.JsKlibMetadataProtoBuf.Library.getDefaultInstance()) return this;
-        if (other.hasKind()) {
-          setKind(other.getKind());
-        }
         if (!other.packageFragment_.isEmpty()) {
           if (packageFragment_.isEmpty()) {
             packageFragment_ = other.packageFragment_;
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000001);
           } else {
             ensurePackageFragmentIsMutable();
             packageFragment_.addAll(other.packageFragment_);
@@ -3707,7 +3577,7 @@ public final class JsKlibMetadataProtoBuf {
         if (!other.importedModule_.isEmpty()) {
           if (importedModule_.isEmpty()) {
             importedModule_ = other.importedModule_;
-            bitField0_ = (bitField0_ & ~0x00000004);
+            bitField0_ = (bitField0_ & ~0x00000002);
           } else {
             ensureImportedModuleIsMutable();
             importedModule_.addAll(other.importedModule_);
@@ -3748,47 +3618,12 @@ public final class JsKlibMetadataProtoBuf {
       }
       private int bitField0_;
 
-      private org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.JsKlibMetadataProtoBuf.Library.Kind kind_ = org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.JsKlibMetadataProtoBuf.Library.Kind.PLAIN;
-      /**
-       * <code>optional .org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.Library.Kind kind = 1 [default = PLAIN];</code>
-       */
-      public boolean hasKind() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional .org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.Library.Kind kind = 1 [default = PLAIN];</code>
-       */
-      public org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.JsKlibMetadataProtoBuf.Library.Kind getKind() {
-        return kind_;
-      }
-      /**
-       * <code>optional .org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.Library.Kind kind = 1 [default = PLAIN];</code>
-       */
-      public Builder setKind(org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.JsKlibMetadataProtoBuf.Library.Kind value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000001;
-        kind_ = value;
-        
-        return this;
-      }
-      /**
-       * <code>optional .org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.Library.Kind kind = 1 [default = PLAIN];</code>
-       */
-      public Builder clearKind() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        kind_ = org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.JsKlibMetadataProtoBuf.Library.Kind.PLAIN;
-        
-        return this;
-      }
-
       private java.util.List<org.jetbrains.kotlin.metadata.ProtoBuf.PackageFragment> packageFragment_ =
         java.util.Collections.emptyList();
       private void ensurePackageFragmentIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
           packageFragment_ = new java.util.ArrayList<org.jetbrains.kotlin.metadata.ProtoBuf.PackageFragment>(packageFragment_);
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000001;
          }
       }
 
@@ -3894,7 +3729,7 @@ public final class JsKlibMetadataProtoBuf {
        */
       public Builder clearPackageFragment() {
         packageFragment_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000001);
 
         return this;
       }
@@ -3910,9 +3745,9 @@ public final class JsKlibMetadataProtoBuf {
 
       private org.jetbrains.kotlin.protobuf.LazyStringList importedModule_ = org.jetbrains.kotlin.protobuf.LazyStringArrayList.EMPTY;
       private void ensureImportedModuleIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
           importedModule_ = new org.jetbrains.kotlin.protobuf.LazyStringArrayList(importedModule_);
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000002;
          }
       }
       /**
@@ -3983,7 +3818,7 @@ public final class JsKlibMetadataProtoBuf {
        */
       public Builder clearImportedModule() {
         importedModule_ = org.jetbrains.kotlin.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         
         return this;
       }

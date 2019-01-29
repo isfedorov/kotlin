@@ -16,14 +16,13 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.parentOrNull
 import org.jetbrains.kotlin.serialization.deserialization.*
 import org.jetbrains.kotlin.storage.StorageManager
-import org.jetbrains.kotlin.utils.JsMetadataVersion
 
 fun createJsKlibMetadataPackageFragmentProvider(
     storageManager: StorageManager,
     module: ModuleDescriptor,
     header: JsKlibMetadataProtoBuf.Header,
     packageFragmentProtos: List<ProtoBuf.PackageFragment>,
-    metadataVersion: JsMetadataVersion,
+    metadataVersion: JsKlibMetadataVersion,
     configuration: DeserializationConfiguration,
     lookupTracker: LookupTracker
 ): PackageFragmentProvider {

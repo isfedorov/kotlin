@@ -5,21 +5,17 @@
 
 package org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata
 
-import org.jetbrains.kotlin.descriptors.DeclarationDescriptor
 import org.jetbrains.kotlin.descriptors.ModuleDescriptor
-import org.jetbrains.kotlin.descriptors.PackageFragmentDescriptor
 import org.jetbrains.kotlin.descriptors.SourceFile
 import org.jetbrains.kotlin.descriptors.annotations.AnnotationDescriptor
 import org.jetbrains.kotlin.metadata.ProtoBuf
 import org.jetbrains.kotlin.metadata.deserialization.NameResolverImpl
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
-import org.jetbrains.kotlin.resolve.DescriptorUtils
 import org.jetbrains.kotlin.serialization.deserialization.*
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedContainerSource
 import org.jetbrains.kotlin.storage.StorageManager
 import org.jetbrains.kotlin.storage.getValue
-import org.jetbrains.kotlin.utils.JsMetadataVersion
 
 class JsKlibMetadataPackageFragment(
     fqName: FqName,
@@ -27,7 +23,7 @@ class JsKlibMetadataPackageFragment(
     module: ModuleDescriptor,
     proto: ProtoBuf.PackageFragment,
     header: JsKlibMetadataProtoBuf.Header,
-    metadataVersion: JsMetadataVersion,
+    metadataVersion: JsKlibMetadataVersion,
     configuration: DeserializationConfiguration
 ) : DeserializedPackageFragmentImpl(
     fqName, storageManager, module, proto, metadataVersion, JsContainerSource(fqName, header, configuration)
@@ -42,15 +38,6 @@ class JsKlibMetadataPackageFragment(
     override fun initialize(components: DeserializationComponents) {
         super.initialize(components)
         this.annotationDeserializer = AnnotationDeserializer(components.moduleDescriptor, components.notFoundClasses)
-    }
-
-    fun getContainingFileAnnotations(descriptor: DeclarationDescriptor): List<AnnotationDescriptor> {
-        if (DescriptorUtils.getParentOfType(descriptor, PackageFragmentDescriptor::class.java) != this) {
-            throw IllegalArgumentException("Provided descriptor $descriptor does not belong to this package $this")
-        }
-        val fileId = descriptor.extractFileId()
-
-        return fileId?.let { fileMap[it] }?.annotations.orEmpty()
     }
 
     inner class FileHolder(private val annotationsProto: List<ProtoBuf.Annotation>) {

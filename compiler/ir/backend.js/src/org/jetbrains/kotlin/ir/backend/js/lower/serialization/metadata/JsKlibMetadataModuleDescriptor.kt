@@ -7,7 +7,6 @@ package org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata
 
 class JsKlibMetadataModuleDescriptor<out T>(
     val name: String,
-    val kind: ModuleKind,
     val imported: List<String>,
     val data: T
 )

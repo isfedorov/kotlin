@@ -6,7 +6,13 @@
 package org.jetbrains.kotlin.ir.backend.js
 
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.util.io.FileUtil
+import com.intellij.openapi.vfs.VfsUtilCore
 import org.jetbrains.kotlin.backend.common.CompilerPhaseManager
+import org.jetbrains.kotlin.backend.common.output.OutputFile
+import org.jetbrains.kotlin.backend.common.output.OutputFileCollection
+import org.jetbrains.kotlin.backend.common.output.SimpleOutputBinaryFile
+import org.jetbrains.kotlin.backend.common.output.SimpleOutputFileCollection
 import org.jetbrains.kotlin.config.CommonConfigurationKeys
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.config.languageVersionSettings
@@ -23,13 +29,22 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.progress.ProgressIndicatorAndCompilationCanceledStatus
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi2ir.Psi2IrTranslator
+import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.CompilerDeserializationConfiguration
+import org.jetbrains.kotlin.serialization.js.JsSerializerProtocol
 import org.jetbrains.kotlin.storage.LockBasedStorageManager
 import org.jetbrains.kotlin.utils.JsMetadataVersion
 import org.jetbrains.kotlin.utils.KotlinJavascriptMetadataUtils
 import java.io.File
 
 data class Result(val moduleDescriptor: ModuleDescriptor, val generatedCode: String, val moduleFragment: IrModuleFragment)
+
+fun OutputFileCollection.writeAll(outputDir: File) {
+    for (file in asList()) {
+        val output = File(outputDir, file.relativePath)
+        FileUtil.writeToFile(output, file.asByteArray())
+    }
+}
 
 fun compile(
     project: Project,
@@ -85,19 +100,17 @@ fun compile(
 //        val serializedIr = IrModuleSerializer(context, declarationTable/*, onlyForInlines = false*/).serializedIrModule(moduleFragment)
         val serializer = JsKlibMetadataSerializationUtil
 //        val serializedData = serializer.serializeModule(analysisResult.moduleDescriptor, serializedIr)
-        val moduleDescription = JsKlibMetadataModuleDescriptor(
-            name = configuration.get(CommonConfigurationKeys.MODULE_NAME) as String,
-            data = moduleFragment.descriptor,
-            kind = ModuleKind.UMD,
-            imported = dependencies.map { it.name.asString() }
-        )
+        val moduleName = configuration.get(CommonConfigurationKeys.MODULE_NAME) as String
+        val metadataVersion = configuration.get(CommonConfigurationKeys.METADATA_VERSION)  as? JsKlibMetadataVersion
+            ?: JsKlibMetadataVersion.INSTANCE
+        val moduleDescription =
+            JsKlibMetadataModuleDescriptor(moduleName, dependencies.map { it.name.asString() }, moduleFragment.descriptor)
         var index = 0L
         val serializedData = serializer.serializeMetadata(
             psi2IrContext.bindingContext,
             moduleDescription,
             configuration.get(CommonConfigurationKeys.LANGUAGE_VERSION_SETTINGS)!!,
-            configuration.get(CommonConfigurationKeys.METADATA_VERSION)  as? JsMetadataVersion
-                ?: JsMetadataVersion.INSTANCE
+            metadataVersion
         ) {
 //            val index = declarationTable.descriptorTable.get(it)
 //            index?.let { newDescriptorUniqId(it) }
@@ -130,23 +143,20 @@ fun compile(
 //            debugFile.appendText("\n")
 //        }
 
-        val metadata = File(stdKlibDir, "${project.name}${KotlinJavascriptMetadataUtils.META_JS_SUFFIX}").also {
-            it.writeText(serializedData.asString())
+        val metadata = File(stdKlibDir, "${moduleDescription.name}${JsKlibMetadataSerializationUtil.CLASS_METADATA_FILE_EXTENSION}").also {
+            it.writeBytes(serializedData.asByteArray())
         }
 
-//
         val storageManager = LockBasedStorageManager("JsConfig")
 //        // CREATE NEW MODULE DESCRIPTOR HERE AND DESERIALIZE IT
-//
-        val metadatas = KotlinJavascriptMetadataUtils.loadMetadata(metadata)
-        val mt = metadatas.single()
+
         val lookupTracker = configuration.get(CommonConfigurationKeys.LOOKUP_TRACKER, LookupTracker.DO_NOTHING)
-        val parts = serializer.readModuleAsProto(mt.body, mt.version)
+        val parts = serializer.readModuleAsProto(metadata.readBytes())
         val md = ModuleDescriptorImpl(
-            Name.special("<" + mt.moduleName + ">"), storageManager, JsPlatform.builtIns
+            Name.special("<$moduleName>"), storageManager, JsPlatform.builtIns
         )
         val provider = createJsKlibMetadataPackageFragmentProvider(
-            storageManager, md, parts.header, parts.body, mt.version,
+            storageManager, md, parts.header, parts.body, metadataVersion,
             CompilerDeserializationConfiguration(configuration.languageVersionSettings),
             lookupTracker
         )

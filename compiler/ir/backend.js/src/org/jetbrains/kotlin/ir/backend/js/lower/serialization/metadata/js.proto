@@ -116,15 +116,6 @@ message Classes {
 }
 
 message Library {
-  enum Kind {
-    PLAIN = 1;
-    AMD = 2;
-    COMMON_JS = 3;
-    UMD = 4;
-  }
-
-  optional Kind kind = 1 [default = PLAIN];
-
   repeated org.jetbrains.kotlin.metadata.PackageFragment package_fragment = 2;
 
   repeated string imported_module = 3;

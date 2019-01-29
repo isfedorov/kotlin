@@ -4033,15 +4033,6 @@ public final class DebugJsKlibMetadataProtoBuf {
       org.jetbrains.kotlin.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.Library.Kind kind = 1 [default = PLAIN];</code>
-     */
-    boolean hasKind();
-    /**
-     * <code>optional .org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.Library.Kind kind = 1 [default = PLAIN];</code>
-     */
-    org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.DebugJsKlibMetadataProtoBuf.Library.Kind getKind();
-
-    /**
      * <code>repeated .org.jetbrains.kotlin.metadata.PackageFragment package_fragment = 2;</code>
      */
     java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.PackageFragment> 
@@ -4136,30 +4127,19 @@ public final class DebugJsKlibMetadataProtoBuf {
               }
               break;
             }
-            case 8: {
-              int rawValue = input.readEnum();
-              org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.DebugJsKlibMetadataProtoBuf.Library.Kind value = org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.DebugJsKlibMetadataProtoBuf.Library.Kind.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(1, rawValue);
-              } else {
-                bitField0_ |= 0x00000001;
-                kind_ = value;
-              }
-              break;
-            }
             case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
                 packageFragment_ = new java.util.ArrayList<org.jetbrains.kotlin.metadata.DebugProtoBuf.PackageFragment>();
-                mutable_bitField0_ |= 0x00000002;
+                mutable_bitField0_ |= 0x00000001;
               }
               packageFragment_.add(input.readMessage(org.jetbrains.kotlin.metadata.DebugProtoBuf.PackageFragment.PARSER, extensionRegistry));
               break;
             }
             case 26: {
               org.jetbrains.kotlin.protobuf.ByteString bs = input.readBytes();
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 importedModule_ = new org.jetbrains.kotlin.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000004;
+                mutable_bitField0_ |= 0x00000002;
               }
               importedModule_.add(bs);
               break;
@@ -4172,10 +4152,10 @@ public final class DebugJsKlibMetadataProtoBuf {
         throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           packageFragment_ = java.util.Collections.unmodifiableList(packageFragment_);
         }
-        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           importedModule_ = importedModule_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
@@ -4207,122 +4187,6 @@ public final class DebugJsKlibMetadataProtoBuf {
     @java.lang.Override
     public org.jetbrains.kotlin.protobuf.Parser<Library> getParserForType() {
       return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.Library.Kind}
-     */
-    public enum Kind
-        implements org.jetbrains.kotlin.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>PLAIN = 1;</code>
-       */
-      PLAIN(0, 1),
-      /**
-       * <code>AMD = 2;</code>
-       */
-      AMD(1, 2),
-      /**
-       * <code>COMMON_JS = 3;</code>
-       */
-      COMMON_JS(2, 3),
-      /**
-       * <code>UMD = 4;</code>
-       */
-      UMD(3, 4),
-      ;
-
-      /**
-       * <code>PLAIN = 1;</code>
-       */
-      public static final int PLAIN_VALUE = 1;
-      /**
-       * <code>AMD = 2;</code>
-       */
-      public static final int AMD_VALUE = 2;
-      /**
-       * <code>COMMON_JS = 3;</code>
-       */
-      public static final int COMMON_JS_VALUE = 3;
-      /**
-       * <code>UMD = 4;</code>
-       */
-      public static final int UMD_VALUE = 4;
-
-
-      public final int getNumber() { return value; }
-
-      public static Kind valueOf(int value) {
-        switch (value) {
-          case 1: return PLAIN;
-          case 2: return AMD;
-          case 3: return COMMON_JS;
-          case 4: return UMD;
-          default: return null;
-        }
-      }
-
-      public static org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<Kind>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<Kind>
-          internalValueMap =
-            new org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<Kind>() {
-              public Kind findValueByNumber(int number) {
-                return Kind.valueOf(number);
-              }
-            };
-
-      public final org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final org.jetbrains.kotlin.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final org.jetbrains.kotlin.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.DebugJsKlibMetadataProtoBuf.Library.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final Kind[] VALUES = values();
-
-      public static Kind valueOf(
-          org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private Kind(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.Library.Kind)
-    }
-
-    private int bitField0_;
-    public static final int KIND_FIELD_NUMBER = 1;
-    private org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.DebugJsKlibMetadataProtoBuf.Library.Kind kind_;
-    /**
-     * <code>optional .org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.Library.Kind kind = 1 [default = PLAIN];</code>
-     */
-    public boolean hasKind() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional .org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.Library.Kind kind = 1 [default = PLAIN];</code>
-     */
-    public org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.DebugJsKlibMetadataProtoBuf.Library.Kind getKind() {
-      return kind_;
     }
 
     public static final int PACKAGE_FRAGMENT_FIELD_NUMBER = 2;
@@ -4390,7 +4254,6 @@ public final class DebugJsKlibMetadataProtoBuf {
     }
 
     private void initFields() {
-      kind_ = org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.DebugJsKlibMetadataProtoBuf.Library.Kind.PLAIN;
       packageFragment_ = java.util.Collections.emptyList();
       importedModule_ = org.jetbrains.kotlin.protobuf.LazyStringArrayList.EMPTY;
     }
@@ -4413,9 +4276,6 @@ public final class DebugJsKlibMetadataProtoBuf {
     public void writeTo(org.jetbrains.kotlin.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeEnum(1, kind_.getNumber());
-      }
       for (int i = 0; i < packageFragment_.size(); i++) {
         output.writeMessage(2, packageFragment_.get(i));
       }
@@ -4431,10 +4291,6 @@ public final class DebugJsKlibMetadataProtoBuf {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += org.jetbrains.kotlin.protobuf.CodedOutputStream
-          .computeEnumSize(1, kind_.getNumber());
-      }
       for (int i = 0; i < packageFragment_.size(); i++) {
         size += org.jetbrains.kotlin.protobuf.CodedOutputStream
           .computeMessageSize(2, packageFragment_.get(i));
@@ -4566,16 +4422,14 @@ public final class DebugJsKlibMetadataProtoBuf {
 
       public Builder clear() {
         super.clear();
-        kind_ = org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.DebugJsKlibMetadataProtoBuf.Library.Kind.PLAIN;
-        bitField0_ = (bitField0_ & ~0x00000001);
         if (packageFragmentBuilder_ == null) {
           packageFragment_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
           packageFragmentBuilder_.clear();
         }
         importedModule_ = org.jetbrains.kotlin.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -4603,26 +4457,20 @@ public final class DebugJsKlibMetadataProtoBuf {
       public org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.DebugJsKlibMetadataProtoBuf.Library buildPartial() {
         org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.DebugJsKlibMetadataProtoBuf.Library result = new org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.DebugJsKlibMetadataProtoBuf.Library(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.kind_ = kind_;
         if (packageFragmentBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
             packageFragment_ = java.util.Collections.unmodifiableList(packageFragment_);
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000001);
           }
           result.packageFragment_ = packageFragment_;
         } else {
           result.packageFragment_ = packageFragmentBuilder_.build();
         }
-        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
           importedModule_ = importedModule_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000002);
         }
         result.importedModule_ = importedModule_;
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -4638,14 +4486,11 @@ public final class DebugJsKlibMetadataProtoBuf {
 
       public Builder mergeFrom(org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.DebugJsKlibMetadataProtoBuf.Library other) {
         if (other == org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.DebugJsKlibMetadataProtoBuf.Library.getDefaultInstance()) return this;
-        if (other.hasKind()) {
-          setKind(other.getKind());
-        }
         if (packageFragmentBuilder_ == null) {
           if (!other.packageFragment_.isEmpty()) {
             if (packageFragment_.isEmpty()) {
               packageFragment_ = other.packageFragment_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000001);
             } else {
               ensurePackageFragmentIsMutable();
               packageFragment_.addAll(other.packageFragment_);
@@ -4658,7 +4503,7 @@ public final class DebugJsKlibMetadataProtoBuf {
               packageFragmentBuilder_.dispose();
               packageFragmentBuilder_ = null;
               packageFragment_ = other.packageFragment_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000001);
               packageFragmentBuilder_ = 
                 org.jetbrains.kotlin.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getPackageFragmentFieldBuilder() : null;
@@ -4670,7 +4515,7 @@ public final class DebugJsKlibMetadataProtoBuf {
         if (!other.importedModule_.isEmpty()) {
           if (importedModule_.isEmpty()) {
             importedModule_ = other.importedModule_;
-            bitField0_ = (bitField0_ & ~0x00000004);
+            bitField0_ = (bitField0_ & ~0x00000002);
           } else {
             ensureImportedModuleIsMutable();
             importedModule_.addAll(other.importedModule_);
@@ -4710,47 +4555,12 @@ public final class DebugJsKlibMetadataProtoBuf {
       }
       private int bitField0_;
 
-      private org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.DebugJsKlibMetadataProtoBuf.Library.Kind kind_ = org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.DebugJsKlibMetadataProtoBuf.Library.Kind.PLAIN;
-      /**
-       * <code>optional .org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.Library.Kind kind = 1 [default = PLAIN];</code>
-       */
-      public boolean hasKind() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional .org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.Library.Kind kind = 1 [default = PLAIN];</code>
-       */
-      public org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.DebugJsKlibMetadataProtoBuf.Library.Kind getKind() {
-        return kind_;
-      }
-      /**
-       * <code>optional .org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.Library.Kind kind = 1 [default = PLAIN];</code>
-       */
-      public Builder setKind(org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.DebugJsKlibMetadataProtoBuf.Library.Kind value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000001;
-        kind_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional .org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.Library.Kind kind = 1 [default = PLAIN];</code>
-       */
-      public Builder clearKind() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        kind_ = org.jetbrains.kotlin.ir.backend.js.lower.serialization.metadata.DebugJsKlibMetadataProtoBuf.Library.Kind.PLAIN;
-        onChanged();
-        return this;
-      }
-
       private java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.PackageFragment> packageFragment_ =
         java.util.Collections.emptyList();
       private void ensurePackageFragmentIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
           packageFragment_ = new java.util.ArrayList<org.jetbrains.kotlin.metadata.DebugProtoBuf.PackageFragment>(packageFragment_);
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000001;
          }
       }
 
@@ -4900,7 +4710,7 @@ public final class DebugJsKlibMetadataProtoBuf {
       public Builder clearPackageFragment() {
         if (packageFragmentBuilder_ == null) {
           packageFragment_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
           packageFragmentBuilder_.clear();
@@ -4977,7 +4787,7 @@ public final class DebugJsKlibMetadataProtoBuf {
           packageFragmentBuilder_ = new org.jetbrains.kotlin.protobuf.RepeatedFieldBuilder<
               org.jetbrains.kotlin.metadata.DebugProtoBuf.PackageFragment, org.jetbrains.kotlin.metadata.DebugProtoBuf.PackageFragment.Builder, org.jetbrains.kotlin.metadata.DebugProtoBuf.PackageFragmentOrBuilder>(
                   packageFragment_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  ((bitField0_ & 0x00000001) == 0x00000001),
                   getParentForChildren(),
                   isClean());
           packageFragment_ = null;
@@ -4987,9 +4797,9 @@ public final class DebugJsKlibMetadataProtoBuf {
 
       private org.jetbrains.kotlin.protobuf.LazyStringList importedModule_ = org.jetbrains.kotlin.protobuf.LazyStringArrayList.EMPTY;
       private void ensureImportedModuleIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
           importedModule_ = new org.jetbrains.kotlin.protobuf.LazyStringArrayList(importedModule_);
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000002;
          }
       }
       /**
@@ -5060,7 +4870,7 @@ public final class DebugJsKlibMetadataProtoBuf {
        */
       public Builder clearImportedModule() {
         importedModule_ = org.jetbrains.kotlin.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
@@ -5399,85 +5209,81 @@ public final class DebugJsKlibMetadataProtoBuf {
       " \003(\0132E.org.jetbrains.kotlin.ir.backend.j" +
       "s.lower.serialization.metadata.File\"!\n\020D" +
       "escriptorUniqId\022\r\n\005index\030\001 \002(\003\"!\n\007Classe" +
-      "s\022\026\n\nclass_name\030\001 \003(\005B\002\020\001\"\204\002\n\007Library\022b\n" +
-      "\004kind\030\001 \001(\0162M.org.jetbrains.kotlin.ir.ba",
-      "ckend.js.lower.serialization.metadata.Li" +
-      "brary.Kind:\005PLAIN\022H\n\020package_fragment\030\002 " +
-      "\003(\0132..org.jetbrains.kotlin.metadata.Pack" +
-      "ageFragment\022\027\n\017imported_module\030\003 \003(\t\"2\n\004" +
-      "Kind\022\t\n\005PLAIN\020\001\022\007\n\003AMD\020\002\022\r\n\tCOMMON_JS\020\003\022" +
-      "\007\n\003UMD\020\004:@\n\017package_fq_name\022&.org.jetbra" +
-      "ins.kotlin.metadata.Package\030\203\001 \001(\005:j\n\020cl" +
-      "ass_annotation\022$.org.jetbrains.kotlin.me" +
-      "tadata.Class\030\202\001 \003(\0132).org.jetbrains.kotl" +
-      "in.metadata.Annotation:G\n\030class_containi",
-      "ng_file_id\022$.org.jetbrains.kotlin.metada" +
-      "ta.Class\030\207\001 \001(\005:\217\001\n\rclass_uniq_id\022$.org." +
-      "jetbrains.kotlin.metadata.Class\030\210\001 \001(\0132Q" +
-      ".org.jetbrains.kotlin.ir.backend.js.lowe" +
-      "r.serialization.metadata.DescriptorUniqI" +
-      "d:v\n\026constructor_annotation\022*.org.jetbra" +
-      "ins.kotlin.metadata.Constructor\030\202\001 \003(\0132)" +
-      ".org.jetbrains.kotlin.metadata.Annotatio" +
-      "n:\233\001\n\023constructor_uniq_id\022*.org.jetbrain" +
-      "s.kotlin.metadata.Constructor\030\203\001 \001(\0132Q.o",
-      "rg.jetbrains.kotlin.ir.backend.js.lower." +
-      "serialization.metadata.DescriptorUniqId:" +
-      "p\n\023function_annotation\022\'.org.jetbrains.k" +
-      "otlin.metadata.Function\030\202\001 \003(\0132).org.jet" +
-      "brains.kotlin.metadata.Annotation:M\n\033fun" +
-      "ction_containing_file_id\022\'.org.jetbrains" +
-      ".kotlin.metadata.Function\030\207\001 \001(\005:\225\001\n\020fun" +
-      "ction_uniq_id\022\'.org.jetbrains.kotlin.met" +
-      "adata.Function\030\210\001 \001(\0132Q.org.jetbrains.ko" +
-      "tlin.ir.backend.js.lower.serialization.m",
-      "etadata.DescriptorUniqId:p\n\023property_ann" +
-      "otation\022\'.org.jetbrains.kotlin.metadata." +
-      "Property\030\202\001 \003(\0132).org.jetbrains.kotlin.m" +
-      "etadata.Annotation:w\n\032property_getter_an" +
-      "notation\022\'.org.jetbrains.kotlin.metadata" +
-      ".Property\030\204\001 \003(\0132).org.jetbrains.kotlin." +
-      "metadata.Annotation:w\n\032property_setter_a" +
-      "nnotation\022\'.org.jetbrains.kotlin.metadat" +
-      "a.Property\030\205\001 \003(\0132).org.jetbrains.kotlin" +
-      ".metadata.Annotation:~\n\022compile_time_val",
-      "ue\022\'.org.jetbrains.kotlin.metadata.Prope" +
-      "rty\030\203\001 \001(\01328.org.jetbrains.kotlin.metada" +
-      "ta.Annotation.Argument.Value:M\n\033property" +
-      "_containing_file_id\022\'.org.jetbrains.kotl" +
-      "in.metadata.Property\030\207\001 \001(\005:\225\001\n\020property" +
-      "_uniq_id\022\'.org.jetbrains.kotlin.metadata" +
-      ".Property\030\210\001 \001(\0132Q.org.jetbrains.kotlin." +
-      "ir.backend.js.lower.serialization.metada" +
-      "ta.DescriptorUniqId:s\n\025enum_entry_annota" +
-      "tion\022(.org.jetbrains.kotlin.metadata.Enu",
-      "mEntry\030\202\001 \003(\0132).org.jetbrains.kotlin.met" +
-      "adata.Annotation:\230\001\n\022enum_entry_uniq_id\022" +
-      "(.org.jetbrains.kotlin.metadata.EnumEntr" +
-      "y\030\203\001 \001(\0132Q.org.jetbrains.kotlin.ir.backe" +
-      "nd.js.lower.serialization.metadata.Descr" +
-      "iptorUniqId:w\n\024parameter_annotation\022-.or" +
-      "g.jetbrains.kotlin.metadata.ValueParamet" +
-      "er\030\202\001 \003(\0132).org.jetbrains.kotlin.metadat" +
-      "a.Annotation:\236\001\n\023value_param_uniq_id\022-.o" +
-      "rg.jetbrains.kotlin.metadata.ValueParame",
-      "ter\030\203\001 \001(\0132Q.org.jetbrains.kotlin.ir.bac" +
-      "kend.js.lower.serialization.metadata.Des" +
-      "criptorUniqId:h\n\017type_annotation\022#.org.j" +
-      "etbrains.kotlin.metadata.Type\030\202\001 \003(\0132).o" +
-      "rg.jetbrains.kotlin.metadata.Annotation:" +
-      "{\n\031type_parameter_annotation\022,.org.jetbr" +
-      "ains.kotlin.metadata.TypeParameter\030\202\001 \003(" +
-      "\0132).org.jetbrains.kotlin.metadata.Annota" +
-      "tion:\234\001\n\022type_param_uniq_id\022,.org.jetbra" +
-      "ins.kotlin.metadata.TypeParameter\030\203\001 \001(\013",
-      "2Q.org.jetbrains.kotlin.ir.backend.js.lo" +
-      "wer.serialization.metadata.DescriptorUni" +
-      "qId:\227\001\n\026package_fragment_files\022..org.jet" +
-      "brains.kotlin.metadata.PackageFragment\030\202" +
-      "\001 \001(\0132F.org.jetbrains.kotlin.ir.backend." +
-      "js.lower.serialization.metadata.FilesB\035B" +
-      "\033DebugJsKlibMetadataProtoBuf"
+      "s\022\026\n\nclass_name\030\001 \003(\005B\002\020\001\"l\n\007Library\022H\n\020" +
+      "package_fragment\030\002 \003(\0132..org.jetbrains.k",
+      "otlin.metadata.PackageFragment\022\027\n\017import" +
+      "ed_module\030\003 \003(\t:@\n\017package_fq_name\022&.org" +
+      ".jetbrains.kotlin.metadata.Package\030\203\001 \001(" +
+      "\005:j\n\020class_annotation\022$.org.jetbrains.ko" +
+      "tlin.metadata.Class\030\202\001 \003(\0132).org.jetbrai" +
+      "ns.kotlin.metadata.Annotation:G\n\030class_c" +
+      "ontaining_file_id\022$.org.jetbrains.kotlin" +
+      ".metadata.Class\030\207\001 \001(\005:\217\001\n\rclass_uniq_id" +
+      "\022$.org.jetbrains.kotlin.metadata.Class\030\210" +
+      "\001 \001(\0132Q.org.jetbrains.kotlin.ir.backend.",
+      "js.lower.serialization.metadata.Descript" +
+      "orUniqId:v\n\026constructor_annotation\022*.org" +
+      ".jetbrains.kotlin.metadata.Constructor\030\202" +
+      "\001 \003(\0132).org.jetbrains.kotlin.metadata.An" +
+      "notation:\233\001\n\023constructor_uniq_id\022*.org.j" +
+      "etbrains.kotlin.metadata.Constructor\030\203\001 " +
+      "\001(\0132Q.org.jetbrains.kotlin.ir.backend.js" +
+      ".lower.serialization.metadata.Descriptor" +
+      "UniqId:p\n\023function_annotation\022\'.org.jetb" +
+      "rains.kotlin.metadata.Function\030\202\001 \003(\0132).",
+      "org.jetbrains.kotlin.metadata.Annotation" +
+      ":M\n\033function_containing_file_id\022\'.org.je" +
+      "tbrains.kotlin.metadata.Function\030\207\001 \001(\005:" +
+      "\225\001\n\020function_uniq_id\022\'.org.jetbrains.kot" +
+      "lin.metadata.Function\030\210\001 \001(\0132Q.org.jetbr" +
+      "ains.kotlin.ir.backend.js.lower.serializ" +
+      "ation.metadata.DescriptorUniqId:p\n\023prope" +
+      "rty_annotation\022\'.org.jetbrains.kotlin.me" +
+      "tadata.Property\030\202\001 \003(\0132).org.jetbrains.k" +
+      "otlin.metadata.Annotation:w\n\032property_ge",
+      "tter_annotation\022\'.org.jetbrains.kotlin.m" +
+      "etadata.Property\030\204\001 \003(\0132).org.jetbrains." +
+      "kotlin.metadata.Annotation:w\n\032property_s" +
+      "etter_annotation\022\'.org.jetbrains.kotlin." +
+      "metadata.Property\030\205\001 \003(\0132).org.jetbrains" +
+      ".kotlin.metadata.Annotation:~\n\022compile_t" +
+      "ime_value\022\'.org.jetbrains.kotlin.metadat" +
+      "a.Property\030\203\001 \001(\01328.org.jetbrains.kotlin" +
+      ".metadata.Annotation.Argument.Value:M\n\033p" +
+      "roperty_containing_file_id\022\'.org.jetbrai",
+      "ns.kotlin.metadata.Property\030\207\001 \001(\005:\225\001\n\020p" +
+      "roperty_uniq_id\022\'.org.jetbrains.kotlin.m" +
+      "etadata.Property\030\210\001 \001(\0132Q.org.jetbrains." +
+      "kotlin.ir.backend.js.lower.serialization" +
+      ".metadata.DescriptorUniqId:s\n\025enum_entry" +
+      "_annotation\022(.org.jetbrains.kotlin.metad" +
+      "ata.EnumEntry\030\202\001 \003(\0132).org.jetbrains.kot" +
+      "lin.metadata.Annotation:\230\001\n\022enum_entry_u" +
+      "niq_id\022(.org.jetbrains.kotlin.metadata.E" +
+      "numEntry\030\203\001 \001(\0132Q.org.jetbrains.kotlin.i",
+      "r.backend.js.lower.serialization.metadat" +
+      "a.DescriptorUniqId:w\n\024parameter_annotati" +
+      "on\022-.org.jetbrains.kotlin.metadata.Value" +
+      "Parameter\030\202\001 \003(\0132).org.jetbrains.kotlin." +
+      "metadata.Annotation:\236\001\n\023value_param_uniq" +
+      "_id\022-.org.jetbrains.kotlin.metadata.Valu" +
+      "eParameter\030\203\001 \001(\0132Q.org.jetbrains.kotlin" +
+      ".ir.backend.js.lower.serialization.metad" +
+      "ata.DescriptorUniqId:h\n\017type_annotation\022" +
+      "#.org.jetbrains.kotlin.metadata.Type\030\202\001 ",
+      "\003(\0132).org.jetbrains.kotlin.metadata.Anno" +
+      "tation:{\n\031type_parameter_annotation\022,.or" +
+      "g.jetbrains.kotlin.metadata.TypeParamete" +
+      "r\030\202\001 \003(\0132).org.jetbrains.kotlin.metadata" +
+      ".Annotation:\234\001\n\022type_param_uniq_id\022,.org" +
+      ".jetbrains.kotlin.metadata.TypeParameter" +
+      "\030\203\001 \001(\0132Q.org.jetbrains.kotlin.ir.backen" +
+      "d.js.lower.serialization.metadata.Descri" +
+      "ptorUniqId:\227\001\n\026package_fragment_files\022.." +
+      "org.jetbrains.kotlin.metadata.PackageFra",
+      "gment\030\202\001 \001(\0132F.org.jetbrains.kotlin.ir.b" +
+      "ackend.js.lower.serialization.metadata.F" +
+      "ilesB\035B\033DebugJsKlibMetadataProtoBuf"
     };
     org.jetbrains.kotlin.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new org.jetbrains.kotlin.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5527,7 +5333,7 @@ public final class DebugJsKlibMetadataProtoBuf {
     internal_static_org_jetbrains_kotlin_ir_backend_js_lower_serialization_metadata_Library_fieldAccessorTable = new
       org.jetbrains.kotlin.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_org_jetbrains_kotlin_ir_backend_js_lower_serialization_metadata_Library_descriptor,
-        new java.lang.String[] { "Kind", "PackageFragment", "ImportedModule", });
+        new java.lang.String[] { "PackageFragment", "ImportedModule", });
     packageFqName.internalInit(descriptor.getExtensions().get(0));
     classAnnotation.internalInit(descriptor.getExtensions().get(1));
     classContainingFileId.internalInit(descriptor.getExtensions().get(2));
